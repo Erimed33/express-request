@@ -1,9 +1,28 @@
 const express = require('express')
 const app = express()
-const port = 8888;
+// const port = 8888;
 
 const pokemon = require("./models/pokemon.json");
-console.log(pokemon[0]);
+// console.log(pokemon[0]);
+
+ //Search pokemon by name
+
+ app.get('/pokemon/search/:name', (req, res) => {
+
+  // name request
+  const nameToFind  = req.params.name.toLowerCase()
+
+// find pokemon in the array in object
+  const foundPokemon = pokemon.find(p => p.name.toLowerCase() === nameToFind.toLowerCase())
+
+  if (!foundPokemon) {
+    res.status(404).send(`sorry no pokemon with name: ${nameToFind}`)
+  
+  } else {
+
+    res.send(foundPokemon)
+  }
+})
 
 
 app.get('/:verb/:adjective/:noun', (request, response) => {
@@ -53,16 +72,8 @@ app.get('/bugs', (request, response) => {
       }
     })
 
-    app.get('/pokemon/search', (req, res) => {
-      // name request
-      const { name } = request.params
 
-      pokemon.find(element => element.name.toLowerCase() === name.toLowerCase())
-
-
-
-
-    })
+   
     
    
   
