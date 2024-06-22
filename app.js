@@ -34,6 +34,8 @@ app.get('/bugs', (request, response) => {
       }
     });
 
+
+    // POKE-EXPRESS ROUTE!
     app.get('/pokemon', (request, respond) => {
       respond.json(pokemon)
     })
