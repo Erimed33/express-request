@@ -53,7 +53,16 @@ app.get('/bugs', (request, response) => {
       }
     })
 
-    app.get('/pokemon/search')
+    app.get('/pokemon/search', (req, res) => {
+      // name request
+      const { name } = request.params
+
+      pokemon.find(element => element.name.toLowerCase() === name.toLowerCase())
+
+
+
+
+    })
     
    
   
