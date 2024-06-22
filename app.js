@@ -3,7 +3,7 @@ const app = express()
 const port = 8888;
 
 const pokemon = require("./models/pokemon.json");
-// console.log(pokemon[0]);
+console.log(pokemon[0]);
 
 
 app.get('/:verb/:adjective/:noun', (request, response) => {
@@ -39,18 +39,21 @@ app.get('/bugs', (request, response) => {
     app.get('/pokemon', (request, respond) => {
       respond.json(pokemon)
     })
-
+// looking up pokemon with an index
     app.get('/pokemon/:indexOfArray', (request, respond) => {
       const indexOfArray = parseInt(request.params.indexOfArray, 10)
       // if someone puts a number less than 0 or a word return sorry string
       if (isNaN(indexOfArray) || indexOfArray < 0 || indexOfArray >= pokemon.length) {
-       response.send(
+       respond.send(
         `<h1>sorry, no pokemon found at /pokemon[${indexOfArray}]</h1>`)
       } else {
-      response.send(`/pokemon[${indexOfArray}`)
+        const selectedIndexPokemon = pokemon[indexOfArray]
+      respond.send(selectedIndexPokemon)
 
       }
     })
+
+    app.get('/pokemon/search')
     
    
   
